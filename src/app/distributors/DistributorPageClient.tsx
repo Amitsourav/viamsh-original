@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import AnimatedSection from '@/components/shared/AnimatedSection';
 import DistributorForm from './DistributorForm';
@@ -225,6 +225,12 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 /* ──────────────────────── Main Page ──────────────────────── */
 
 export default function DistributorPageClient() {
+  useEffect(() => {
+    if (!window.location.hash) {
+      window.scrollTo(0, 0);
+    }
+  }, []);
+
   return (
     <>
       {/* ═══ HERO ═══ */}
