@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useUIStore } from '@/store/uiStore';
@@ -15,6 +16,7 @@ const navLinks = [
 ];
 
 export default function MobileMenu() {
+  const pathname = usePathname();
   const mobileMenuOpen = useUIStore((s) => s.mobileMenuOpen);
   const toggleMobileMenu = useUIStore((s) => s.toggleMobileMenu);
 
@@ -42,10 +44,10 @@ export default function MobileMenu() {
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-              <span className="text-xl font-bold text-[#2E7D32]">Viamsh</span>
+              <span className="text-xl font-bold text-[#6366F1]">Viamsh</span>
               <button
                 onClick={toggleMobileMenu}
-                className="rounded-full p-2 text-[#1A1A2E] transition-colors hover:bg-[#E8F5E9]"
+                className="rounded-full p-2 text-[#1A1A2E] transition-colors hover:bg-[#EEF2FF]"
                 aria-label="Close menu"
               >
                 <X className="h-5 w-5" />
@@ -55,22 +57,29 @@ export default function MobileMenu() {
             {/* Navigation Links */}
             <nav className="flex-1 overflow-y-auto px-6 py-6">
               <ul className="space-y-1">
-                {navLinks.map((link, index) => (
-                  <motion.li
-                    key={link.href}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.05 * index }}
-                  >
-                    <Link
-                      href={link.href}
-                      onClick={toggleMobileMenu}
-                      className="block rounded-lg px-4 py-3 text-base font-medium text-[#1A1A2E] transition-colors hover:bg-[#E8F5E9] hover:text-[#2E7D32]"
+                {navLinks.map((link, index) => {
+                  const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
+                  return (
+                    <motion.li
+                      key={link.href}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.05 * index }}
                     >
-                      {link.label}
-                    </Link>
-                  </motion.li>
-                ))}
+                      <Link
+                        href={link.href}
+                        onClick={toggleMobileMenu}
+                        className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1] ${
+                          isActive
+                            ? 'font-bold text-[#6366F1] bg-[#EEF2FF]'
+                            : 'font-medium text-[#1A1A2E]'
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    </motion.li>
+                  );
+                })}
               </ul>
             </nav>
 
@@ -79,7 +88,7 @@ export default function MobileMenu() {
               <Link
                 href="/account/login"
                 onClick={toggleMobileMenu}
-                className="block w-full rounded-lg bg-[#2E7D32] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#1B5E20]"
+                className="block w-full rounded-lg bg-[#6366F1] px-4 py-3 text-center text-sm font-semibold text-white transition-colors hover:bg-[#4F46E5]"
               >
                 Sign In / Create Account
               </Link>

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShoppingCart, User, Menu } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { useUIStore } from '@/store/uiStore';
@@ -20,6 +21,7 @@ export default function Header() {
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  const pathname = usePathname();
   const itemCount = useCartStore((s) => s.getItemCount());
   const toggleCartSidebar = useUIStore((s) => s.toggleCartSidebar);
   const toggleMobileMenu = useUIStore((s) => s.toggleMobileMenu);
@@ -57,15 +59,22 @@ export default function Header() {
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-lg px-3 py-2 text-sm font-medium text-[#374151] transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1]"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = link.href === '/' ? pathname === '/' : pathname.startsWith(link.href);
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={`rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1] ${
+                    isActive
+                      ? 'font-bold text-[#6366F1] bg-[#EEF2FF]'
+                      : 'font-medium text-[#374151]'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="flex items-center gap-2">
