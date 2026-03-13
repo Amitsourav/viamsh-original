@@ -73,13 +73,17 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1] ${
+                  className={`relative rounded-lg px-3 py-2 text-sm transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1] ${
                     isActive
-                      ? 'font-bold text-[#6366F1] bg-[#EEF2FF]'
-                      : 'font-medium text-[#374151]'
+                      ? 'text-[#6366F1] bg-[#EEF2FF]'
+                      : 'text-[#374151]'
                   }`}
+                  style={{ fontWeight: 700 }}
                 >
                   {link.label}
+                  {isActive && (
+                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-0.5 bg-[#6366F1] rounded-full" />
+                  )}
                 </Link>
               );
             })}

@@ -78,9 +78,10 @@ export default function MobileMenu() {
                         onClick={toggleMobileMenu}
                         className={`block rounded-lg px-4 py-3 text-base transition-colors hover:bg-[#EEF2FF] hover:text-[#6366F1] ${
                           isActive
-                            ? 'font-bold text-[#6366F1] bg-[#EEF2FF]'
-                            : 'font-medium text-[#1A1A2E]'
+                            ? 'text-[#6366F1] bg-[#EEF2FF]'
+                            : 'text-[#1A1A2E]'
                         }`}
+                        style={{ fontWeight: 700 }}
                       >
                         {link.label}
                       </Link>
