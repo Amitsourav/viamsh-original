@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -44,7 +45,13 @@ export default function MobileMenu() {
           >
             {/* Header */}
             <div className="flex items-center justify-between border-b border-gray-100 px-6 py-4">
-              <span className="text-xl font-bold text-[#6366F1]">Viamsh</span>
+              <Image
+                src="/logo.png"
+                alt="Viamsh FMCG"
+                width={100}
+                height={101}
+                className="h-10 w-auto"
+              />
               <button
                 onClick={toggleMobileMenu}
                 className="rounded-full p-2 text-[#1A1A2E] transition-colors hover:bg-[#EEF2FF]"

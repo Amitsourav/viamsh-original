@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Instagram, Facebook, Youtube, Linkedin, Phone, Mail, MapPin } from 'lucide-react';
 
 const quickLinks = [
@@ -44,7 +45,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
             <Link href="/" className="inline-block">
-              <span className="text-2xl font-bold text-[#A78BFA]">Viamsh</span>
+              <Image
+                src="/logo.png"
+                alt="Viamsh FMCG"
+                width={120}
+                height={121}
+                className="h-14 w-auto brightness-0 invert"
+              />
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-gray-400">
               Premium FMCG products crafted with care. Delivering quality from

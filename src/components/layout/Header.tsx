@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { ShoppingCart, User, Menu } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
@@ -55,7 +56,14 @@ export default function Header() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between md:h-20">
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-2xl font-bold text-[#6366F1]">Viamsh</span>
+            <Image
+              src="/logo.png"
+              alt="Viamsh FMCG"
+              width={120}
+              height={121}
+              className="h-12 w-auto"
+              priority
+            />
           </Link>
 
           <nav className="hidden items-center gap-1 lg:flex">

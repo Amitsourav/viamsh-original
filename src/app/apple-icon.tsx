@@ -1,9 +1,14 @@
 import { ImageResponse } from 'next/og';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const logoData = await readFile(join(process.cwd(), 'public', 'logo-icon@2x.png'));
+  const base64 = logoData.toString('base64');
+
   return new ImageResponse(
     (
       <div
@@ -13,22 +18,16 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #6366F1, #8B5CF6)',
-          borderRadius: '40px',
+          background: 'white',
+          borderRadius: '36px',
         }}
       >
-        <span
-          style={{
-            fontSize: '120px',
-            fontWeight: 800,
-            color: 'white',
-            fontFamily: 'system-ui, sans-serif',
-            lineHeight: 1,
-            marginTop: '-4px',
-          }}
-        >
-          V
-        </span>
+        <img
+          src={`data:image/png;base64,${base64}`}
+          width={140}
+          height={121}
+          style={{ objectFit: 'contain' }}
+        />
       </div>
     ),
     { ...size }
