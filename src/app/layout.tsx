@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import AnnouncementBar from '@/components/layout/AnnouncementBar';
@@ -51,6 +52,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-J1B9DX2LDJ"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-J1B9DX2LDJ');
+          `}
+        </Script>
+      </head>
       <body
         className={`${inter.variable} ${poppins.variable} antialiased`}
         suppressHydrationWarning
